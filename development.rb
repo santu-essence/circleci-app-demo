@@ -4,7 +4,7 @@ class Student
     end
 
     def develop
-        puts "#{self.class} developed some skill"
+        puts "#{self.class} developed some skills.."
     end
 end
 
