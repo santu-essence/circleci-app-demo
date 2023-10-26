@@ -1,6 +1,6 @@
 class Student
     def initialize
-        puts "#{self.class} entered into the school"
+        puts "#{self.class} entered into the school..."
     end
 
     def develop
