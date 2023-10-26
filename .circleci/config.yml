@@ -1,0 +1,45 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:3.2.2
+    steps:
+      - checkout
+      - run: ruby development.rb
+  test:
+    docker:
+      - image: cimg/ruby.3.2.2
+    steps:
+      - checkout
+      - run: ruby test.rb
+  deploy:
+    docker:
+      - image: cimg/ruby.3.2.2
+    steps:
+      - checkout
+      - run: ruby deploy.rb
+
+workflows:
+  build_test_and_deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - main
+      - test:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - main
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - main
+
